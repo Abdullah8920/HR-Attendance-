@@ -11,6 +11,7 @@ try {
 
 const seed = async () => {
   try {
+    if (!config.adminPassword) throw new Error('Set ADMIN_PASSWORD before creating an admin account.');
     await mongoose.connect(config.mongoUri);
     console.log('Connected to MongoDB');
 

@@ -105,7 +105,8 @@ export const seedDatabase = async () => {
 
     // 4. ADMIN USER
     const adminEmail = (config.adminEmail || 'admin@saylanihcm.com').toLowerCase().trim();
-    const adminPassword = config.adminPassword || 'AdminPassword123!';
+    if (!config.adminPassword) throw new Error('Set ADMIN_PASSWORD before seeding demo accounts.');
+    const adminPassword = config.adminPassword;
     let adminUser = await User.findOne({ email: adminEmail });
     if (!adminUser) {
       adminUser = await User.create({
